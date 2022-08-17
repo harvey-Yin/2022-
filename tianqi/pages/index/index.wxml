@@ -1,0 +1,6 @@
+<view class='container'>
+  <!-- part1 地区选择器 -->
+  <picker mode='region'>
+    <view>北京市</view>
+  </picker>
+</view>
