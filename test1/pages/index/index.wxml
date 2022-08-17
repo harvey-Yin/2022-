@@ -1,0 +1,7 @@
+< view class="container">
+  <!-- <image src='/images/22-5-31-record-debug.jpeg' mode="widthFix"></image> -->
+  <image src='{{src}}' mode="widthFix"></image>
+  <!-- <text>Hello World</text> -->
+  <text>{{name}}</text>
+  <button open-type="getUserInfo" bindgetuserinfo="getMyInfo">点击获取头像和昵称</button>
+</view>
