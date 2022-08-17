@@ -4,24 +4,88 @@ const app = getApp()
 
 Page({
   data: {
-    motto: 'Hello World',
-    userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    canIUseGetUserProfile: false,
-    canIUseOpenData: wx.canIUse('open-data.type.userAvatarUrl') && wx.canIUse('open-data.type.userNickName') // 如需尝试获取用户信息可改为false
+    region: ["北京市", "北京市", "东城区"],
+    regionID: 101010100,
+    icon:999,
+    text:"多云",
+    temp:0,
+    pressure:0,
+    vis:0,
+    windDir:0,
+    windSpeed:0,
+    windScale:0,
   },
+
+  changeRegion: function (e) {
+    this.setData({
+      region: e.detail.value
+    })
+    this.getWeather();
+  },
+
+  getRegion:function(){
+    var that = this;
+
+    wx.request({
+      url: 'https://geoapi.qweather.com/v2/city/lookup?',
+      data:{
+        location:that.data.region[1],
+        key:'b3247e83bb714301af7203e3f61b2d61'
+      },
+      success:function(res){
+        // console.log(res.data),
+        console.log(res.data.location[0].id),
+        that.data.regionID = res.data.location[0].id
+      },
+    })
+    
+  },
+
+  getWeather: function () {
+    var that = this;
+    this.getRegion();
+    wx.request({
+      url: 'https://devapi.qweather.com/v7/weather/now?',
+      data:{
+        // location:that.data.region[1],
+        location:that.data.regionID,
+        key:'b3247e83bb714301af7203e3f61b2d61'
+      },
+      success:function(res){
+        console.log(res.data);
+        console.log(res.data.now.temp);
+        that.setData({
+          icon:res.data.now.icon,
+          text:res.data.now.text,
+          temp:res.data.now.temp,
+          pressure:res.data.now.pressure,
+          vis:res.data.now.vis,
+          windDir:res.data.now.windDir,
+          windSpeed:res.data.now.windSpeed,
+          windScale:res.data.now.windScale,
+        })
+      },
+    })
+    
+  },
+
+
   // 事件处理函数
   bindViewTap() {
     wx.navigateTo({
       url: '../logs/logs'
     })
   },
+// onLoad: function(options){
+//   this.getWeather();
+// },
+
   onLoad() {
     if (wx.getUserProfile) {
       this.setData({
         canIUseGetUserProfile: true
       })
+      this.getWeather();
     }
   },
   getUserProfile(e) {
