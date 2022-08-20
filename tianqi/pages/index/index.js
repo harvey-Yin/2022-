@@ -23,6 +23,7 @@ Page({
     this.getWeather();
   },
 
+  //用于将城市名转化为城市id
   getRegion:function(){
     var that = this;
 

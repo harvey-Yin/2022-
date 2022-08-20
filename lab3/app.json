@@ -1,0 +1,12 @@
+{
+  "pages": [
+    "pages/index/index"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#787999",
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "口述校史",
+    "backgroundTextStyle": "light",
+    "enablePullDownRefresh": false
+  }
+}
