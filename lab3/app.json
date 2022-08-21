@@ -8,5 +8,6 @@
     "navigationBarTitleText": "口述校史",
     "backgroundTextStyle": "light",
     "enablePullDownRefresh": false
-  }
+  },
+  "sitemapLocation": "sitemap.json"
 }
